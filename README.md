@@ -16,6 +16,15 @@
 ### 1. 环境准备
 
 ```bash
+# 创建虚拟环境
+python -m venv venv
+
+# 激活虚拟环境
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
 # 安装依赖
 pip install -r requirements.txt
 
@@ -43,12 +52,12 @@ DEBUG_MODE=false
 
 ### 3. 配置faucet参数
 
-编辑 `config.json` 文件：
+在 `template` 目录下编辑 `config.json` 文件：
 
 ```json
 {
-  "name": "Octra Faucet",
-  "url": "https://faucet.octra.network/claim",
+  "name": "Template Faucet",
+  "url": "https://faucet.network",
   "method": "POST",
   "headers": {
     "Content-Type": "application/x-www-form-urlencoded",
@@ -69,9 +78,20 @@ DEBUG_MODE=false
 } 
 ```
 
-### 4. 配置代理（可选）
+### 4. 配置钱包地址
 
-编辑 `proxy.txt` 文件：
+在 `template` 目录下编辑 `wallet.txt` 文件，每行一个地址：
+
+```txt
+# 钱包地址列表，每行一个地址
+address1_here
+address2_here
+address3_here
+```
+
+### 5. 配置代理（可选）
+
+在项目根目录下创建 `proxy.txt` 文件：
 
 ```txt
 # 支持格式：
@@ -80,10 +100,17 @@ socks5://127.0.0.1:1080
 http://username:password@proxy.example.com:8080
 ```
 
-### 5. 运行
+### 6. 运行
 
 ```bash
-python main.py
+# 激活虚拟环境（如果尚未激活）
+# Windows:
+venv\Scripts\activate
+# macOS/Linux:
+source venv/bin/activate
+
+# 运行程序
+python template/main.py
 ```
 
 ## 配置说明
@@ -92,8 +119,8 @@ python main.py
 
 | 参数 | 类型 | 说明 | 示例 |
 |------|------|------|------|
-| `name` | string | faucet名称 | "Octra Faucet" |
-| `url` | string | 请求URL | "https://faucet.octra.network/claim" |
+| `name` | string | faucet名称 | "Template Faucet" |
+| `url` | string | 请求URL | "https://faucet.network" |
 | `method` | string | 请求方法 | "POST" 或 "GET" |
 | `headers` | object | 请求头 | 见示例配置 |
 | `address_key` | string | 地址参数名 | "address" |
@@ -104,7 +131,7 @@ python main.py
 | `error_indicators` | array | 失败指示符 | `["error", "failed", "limit"]` |
 | `retry_delay` | number | 重试间隔（秒） | 5 |
 | `max_retries` | number | 最大重试次数 | 3 |
-| `facuet_delay` | number | faucet成功后的间隔（秒） | 5 |
+| `faucet_delay` | number | faucet成功后的间隔（秒） | 5 |
 
 ### 代理配置
 
@@ -113,43 +140,6 @@ python main.py
 - `socks5://host:port`
 - `http://username:password@host:port`
 - `socks5://username:password@host:port`
-
-## 使用示例
-
-### 基本使用
-
-```python
-from main import FaucetTemplate
-
-# 创建faucet实例
-faucet = FaucetTemplate("config.json")
-
-# 请求faucet
-address = "your_wallet_address_here"
-success, message = faucet.claim(address, use_proxy=True)
-
-if success:
-    print(f"✅ 成功: {message}")
-else:
-    print(f"❌ 失败: {message}")
-```
-
-### 批量请求
-
-```python
-addresses = [
-    "address1",
-    "address2", 
-    "address3"
-]
-
-for address in addresses:
-    success, message = faucet.claim(address, use_proxy=True)
-    print(f"{address}: {'✅' if success else '❌'} {message}")
-    
-    # 请求间隔
-    time.sleep(10)
-```
 
 ## 日志
 
@@ -166,6 +156,8 @@ for address in addresses:
 2. **请求频率** - 遵守faucet的请求频率限制
 3. **代理质量** - 使用高质量代理以提高成功率
 4. **配置检查** - 确保配置参数正确无误
+5. **文件路径** - 确保 `wallet.txt` 和 `config.json` 在 `template` 目录下
+6. **虚拟环境** - 建议使用虚拟环境避免依赖冲突
 
 ## 故障排除
 
@@ -184,6 +176,7 @@ for address in addresses:
 3. **配置错误**
    - 检查JSON格式是否正确
    - 确认所有必需参数都已设置
+   - 验证文件路径是否正确
 
 ## 许可证
 
