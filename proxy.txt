@@ -1,0 +1,13 @@
+# 代理配置文件
+# 支持格式：
+# http://username:password@host:port
+# socks5://username:password@host:port
+# http://host:port
+# socks5://host:port
+
+# 示例：
+# http://127.0.0.1:8080
+# socks5://127.0.0.1:1080
+# http://user:pass@proxy.example.com:8080
+# socks5://user:pass@proxy.example.com:1080 
+socks5://127.0.0.1:8031

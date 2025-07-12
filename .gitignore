@@ -1,0 +1,4 @@
+.DS_Store
+.env
+proxy.txt
+*.log

@@ -1,0 +1,20 @@
+{
+  "name": "Octra Faucet",
+  "url": "",
+  "method": "POST",
+  "headers": {
+    "Content-Type": "application/x-www-form-urlencoded",
+  },
+  "address_key": "address",
+  "recaptcha_key": "g-recaptcha-response",
+  "recaptcha_site_key": "6LekoXkrAAAAAMlLCpc2KJqSeUHye6KMxOL5_SES",
+  "additional_params": {
+    "is_validator": false
+  },
+  "log_file": "./faucet.log",
+  "success_indicators": ["success", "claimed","tx-hash"],
+  "error_indicators": ["error", "failed", "limit"],
+  "retry_delay": 5,
+  "max_retries": 3,
+  "faucet_delay": 5
+} 
