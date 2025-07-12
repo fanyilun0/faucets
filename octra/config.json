@@ -1,6 +1,6 @@
 {
-  "name": "Template Faucet",
-  "url": "",
+  "name": "Octra Faucet",
+  "url": "https://faucet.octra.network/claim",
   "method": "POST",
   "headers": {
     "Content-Type": "application/x-www-form-urlencoded"
